@@ -24,7 +24,7 @@
 
 <body>
     <div class="section-title text-center position-relative pb-3 mb-4 mx-auto">
-        <h1>uma BOOKS</h1>
+        <h1>SEARCH BOOKS</h1>
     </div>
     <div class="search-container">
         <input type="text" class="search-input" placeholder="Search Books...">
