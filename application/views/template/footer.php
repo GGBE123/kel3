@@ -18,7 +18,7 @@
                         </div>
                         <div class="d-flex mb-2">
                             <i class="bi bi-geo-alt text-primary me-2"></i>
-                            <p class="mb-0">Politeknik Caltex Riau
+                            <p class="mb-0">Politeknik Caltex Riau itu cringe
                                 Jl. Umban Sari No.1, Umban Sari, Kec. Rumbai, Kota Pekanbaru, Riau 28265</p>
                         </div>
                         <div class="d-flex mb-2">
