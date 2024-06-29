@@ -25,17 +25,20 @@
                 <div class="logo">
                   <img src="<?= base_url('assets/'); ?>img/user.png">
                 </div>
+                <?= $this->session->flashdata('login_message'); ?>
                 <div class="form-group">
-                  <input type="email" name="email" class="form-control _ge_de_ol" type="text" placeholder="Enter Email" required="" aria-required="true">
+                  <input type="email" name="email" class="form-control _ge_de_ol" type="text" placeholder="Enter Email"
+                    required="" aria-required="true">
                   <?= form_error('email', '<small class="text-danger">', '</small>'); ?>
                 </div>
 
                 <div class="form-group">
-                  <input type="password" name="password" class="form-control _ge_de_ol" type="text" placeholder="Enter Password" required="" aria-required="true">
+                  <input type="password" name="password" class="form-control _ge_de_ol" type="text"
+                    placeholder="Enter Password" required="" aria-required="true">
                   <?= form_error('password', '<small class="text-danger">', '</small>'); ?>
                 </div>
 
-                <div class="checkbox form-group">
+                <!--div class="checkbox form-group">
                   <div class="form-check">
                     <input class="form-check-input" type="checkbox" value="" id="">
                     <label class="form-check-label" for="">
@@ -43,12 +46,16 @@
                     </label>
                   </div>
                   <a href="#">Forgot Password</a>
+                </div-->
+
+                <div class="forget_password_wrapper">
+                  <a href="a" style="float : right;">Forgot Password</a>
                 </div>
 
                 <div class="form-group">
-                  <div class="_btn_04">
-                    <button type="submit">Login</button>
-                  </div>
+
+                  <button type="submit" class="_btn_04">Login</button>
+
                 </div>
                 <div class="form-group">
                   <div class="_btn_04">
