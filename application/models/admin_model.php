@@ -1,5 +1,5 @@
 <?php
-class admin_model extends CI_Model
+class Admin_model extends CI_Model
 {
     private $STAFF_USER = 'staff_perpustakaan';
 

@@ -1,5 +1,5 @@
 <?php
-    class buku_model extends CI_Model{
+    class Buku_model extends CI_Model{
         public function getAllBuku(){
             // getAllBuku
         }

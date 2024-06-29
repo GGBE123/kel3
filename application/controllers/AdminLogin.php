@@ -11,7 +11,7 @@ class AdminLogin extends CI_Controller
         if ($this->session->userdata('email')) {
             redirect('admin');
         } else {
-            $this->load->model('admin_model', 'am');
+            $this->load->model('Admin_model', 'am');
         }
     }
     public function index()

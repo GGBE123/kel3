@@ -1,5 +1,5 @@
 <?php
-    class penulis_model extends CI_Model{
+    class Penulis_model extends CI_Model{
         public function login(){
 
         }
