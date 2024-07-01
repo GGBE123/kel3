@@ -3,13 +3,9 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Startup - Startup Website Template</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
-
-    <!-- Favicon -->
-    <link href="<?= base_url('assets/');?>img/favicon.ico" rel="icon">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -73,11 +69,11 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ms-auto py-0">
                     <a href="<?= base_url('home');?>" class="nav-item nav-link">Home</a>
-                    <a href="<?= base_url('list_Buku');?>" class="nav-item nav-link">List Catalog</a>
+                    <a href="<?= base_url('list_Buku');?>" class="nav-item nav-link">Catalog List</a>
                     </div>
                     </div>
                     <a href="<?= base_url('AdminLogin');?>" class="nav-item nav-link">
-                <h3 class="m-0"><i class="fa fa-user-tie me-2"></i>Admin Login</h3>
+                <h5 class="m-0 text-primary"><i class="fa fa-user-tie me-2"></i>Admin Login</h5>
             </a>
                 </div>
             </div>

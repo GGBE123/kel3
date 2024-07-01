@@ -5,7 +5,7 @@
             <div class="col-lg-4 col-md-6 footer-about">
                 <div class="d-flex flex-column align-items-center justify-content-center text-center h-100 bg-primary p-4">
                     <a>
-                        <h1 class="m-0 text-white"><i class="fa fa-user-tie me-2"></i>LOCATION</h1>
+                        <h1 class="m-0 text-white">LOCATION</h1>
                     </a>
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15958.504755926126!2d101.4225703!3d0.5622920499999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31d5ab67086f2e89%3A0x65a24264fec306bb!2sPoliteknik%20Caltex%20Riau!5e0!3m2!1sen!2sid!4v1719198522076!5m2!1sen!2sid" width="350" height="370" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
@@ -18,16 +18,16 @@
                         </div>
                         <div class="d-flex mb-2">
                             <i class="bi bi-geo-alt text-primary me-2"></i>
-                            <p class="mb-0">Politeknik Caltex Riau
+                            <p  class="m-0 text-white">Politeknik Caltex Riau
                                 Jl. Umban Sari No.1, Umban Sari, Kec. Rumbai, Kota Pekanbaru, Riau 28265</p>
                         </div>
                         <div class="d-flex mb-2">
                             <i class="bi bi-envelope-open text-primary me-2"></i>
-                            <p class="mb-0"> pcr@pcr.ac.id</p>
+                            <p  class="m-0 text-white"> pcr@pcr.ac.id</p>
                         </div>
                         <div class="d-flex mb-2">
                             <i class="bi bi-telephone text-primary me-2"></i>
-                            <p class="mb-0">(0761) - 53939 atau 0811 758 0101</p>
+                            <p class="m-0 text-white">(0761) - 53939 atau 0811 758 0101</p>
                         </div>
                         <div class="d-flex mt-4">
                             <a class="btn btn-primary btn-square me-2" href="https://twitter.com/PolicaltexRiau"><i class="fab fa-twitter fw-normal"></i></a>
@@ -74,7 +74,7 @@
         <div class="row justify-content-end">
             <div class="col-lg-8 col-md-6">
                 <div class="d-flex align-items-center justify-content-center" style="height: 75px;">
-                    <p class="mb-0">&copy; <a class="text-white border-bottom" href="https://pcr.ac.id/">Politeknik Caltex Riau</a>. All Rights Reserved.
+                    <p  class="m-0 text-white">&copy; <a class="text-white border-bottom" href="https://pcr.ac.id/">Politeknik Caltex Riau</a>. All Rights Reserved.
                     </p>
                 </div>
             </div>
