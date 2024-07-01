@@ -70,4 +70,25 @@ class Admin extends CI_Controller
 			redirect('adminLogin');
 		}
 	}
+	public function data_buku()
+	{
+		$user = $this->am->get_user_data($this->session->userdata('email'));
+
+		if ($user['role'] == 'staff') {
+			$data = [
+				'data_buku' => 'active',
+				'title' => 'Buku-Dashboard',
+				'user' => $this->am->get_user_data($this->session->userdata('email'))
+			];
+
+			$this->load->view('AdminTemplate/navbar', $data);
+			$this->load->view('Admin/data/data_buku');
+			$this->load->view('AdminTemplate/sidebar');
+		} else {
+
+			$this->session->set_flashdata('login_message', '<div class="alert alert-danger text=center" role="alert">Akses ditolak, silahkan login kembali</div>');
+			$this->session->unset_userdata('email');
+			redirect('adminLogin');
+		}
+	}
 }
