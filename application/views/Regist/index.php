@@ -16,13 +16,21 @@
                     </div>
                     <form action="#!">
                         <div class="row gy-3 gy-md-4 overflow-hidden">
+                        <div class="col-12">
+                                <label for="firstName" class="form-label">NIP/M <span class="text-danger">*</span></label>
+                                <input type="number" class="form-control" name="NIP" id="NIP" placeholder="Masukkan NIP/M" required>
+                            </div>
                             <div class="col-12">
                                 <label for="firstName" class="form-label">Nama <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" name="nama" id="nama" placeholder="Nevo" required>
+                                <input type="text" class="form-control" name="nama" id="nama" placeholder="Masukkan nama" required>
                             </div>
                             <div class="col-12">
                                 <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
                                 <input type="email" class="form-control" name="email" id="email" placeholder="name@role.pcr.ac.id" required>
+                            </div>
+                            <div class="col-12">
+                                <label for="password" class="form-label">Password <span class="text-danger">*</span></label>
+                                <input type="password" class="form-control" name="password" id="password" value="" required>
                             </div>
                             <div class="col-12">
                                 <label for="firstName" class="form-label">Role <span class="text-danger">*</span></label>
@@ -31,10 +39,6 @@
                                     <option>Staff</option>
                                     <option>Mahasiswa</option>
                                 </select>
-                            </div>
-                            <div class="col-12">
-                                <label for="password" class="form-label">Password <span class="text-danger">*</span></label>
-                                <input type="password" class="form-control" name="password" id="password" value="" required>
                             </div>
                             <div class="col-12">
                                 <div class="d-grid">
@@ -48,7 +52,7 @@
                             <hr class="mt-5 mb-4 border-secondary-subtle">
                             <div class="col-12">
                                 <p class="m-0 text-secondary text-center">Already have an account?
-                                    <a href="<?= base_url('Auth'); ?>" class="link-primary text-decoration-none">Login</a>
+                                    <a href="<?= base_url('penulisLogin'); ?>" class="link-primary text-decoration-none">Login</a>
                                 </p>
                             </div>
                         </div>
