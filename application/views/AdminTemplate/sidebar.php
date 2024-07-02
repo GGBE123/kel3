@@ -33,7 +33,7 @@
                                 <li class="<?= @$data_staff ?>">
                                     <a href="<?= base_url('admin/data_staff') ?>" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Data Staff</span>
+                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Data Admin</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
@@ -47,6 +47,25 @@
                             </ul>
                         </li>
                     <?php endif; ?>
+                    <?php if ($user['role'] == 'staff') : ?>
+                        <li class="pcoded-hasmenu <?= @$data_buku ?>">
+                            <a href="javascript:void(0)" class="waves-effect waves-dark">
+                                <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i></span>
+                                <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Data</span>
+                                <span class="pcoded-mcaret"></span>
+                            </a>
+                            <ul class="pcoded-submenu">
+                                <li class="<?= @$data_buku ?>">
+                                    <a href="<?= base_url('admin/data_buku') ?>" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Data Admin</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    <?php endif; ?>
+                  
                 </ul>
             </div>
         </nav>
