@@ -24,25 +24,25 @@ class Penulis extends CI_Controller
 			'user' => $this->pm->get_user_data($this->session->userdata('email'))
 		];
 
-		$this->load->view('AdminTemplate/navbar', $data);
+		$this->load->view('UserTemplate/navbar', $data);
 		$this->load->view('Penulis/index');
-		$this->load->view('AdminTemplate/sidebar');
+		$this->load->view('UserTemplate/sidebar');
 	}
-	public function data_staff()
+	public function data_dosen()
 	{
 		$user = $this->pm->get_user_data($this->session->userdata('email'));
 
-		if ($user['role'] == 'admin') {
+		if ($user['role'] == 'dosen') {
 
 			$data = [
 				'data_staff' => 'active',
-				'title' => 'Staff-Dashboard',
+				'title' => 'Dosen-Dashboard',
 				'user' => $this->pm->get_user_data($this->session->userdata('email'))
 			];
 
-			$this->load->view('AdminTemplate/navbar', $data);
-			$this->load->view('Admin/master_data/data_staff');
-			$this->load->view('AdminTemplate/sidebar');
+			$this->load->view('UserTemplate/navbar', $data);
+			$this->load->view('Penulis/data/pengajuan');
+			$this->load->view('UserTemplate/sidebar');
 		} else {
 
 			$this->session->set_flashdata('login_message', '<div class="alert alert-danger text=center" role="alert">Akses ditolak, silahkan login kembali</div>');
@@ -50,20 +50,41 @@ class Penulis extends CI_Controller
 			redirect('PenulisLogin');
 		}
 	}
-	public function data_penulis()
+	public function data_mahasiswa()
 	{
 		$user = $this->pm->get_user_data($this->session->userdata('email'));
 
-		if ($user['role'] == 'admin') {
+		if ($user['role'] == 'mahasiswa') {
 			$data = [
 				'data_penulis' => 'active',
-				'title' => 'Penulis-Dashboard',
+				'title' => 'Mahasiswa-Dashboard',
 				'user' => $this->pm->get_user_data($this->session->userdata('email'))
 			];
 
-			$this->load->view('AdminTemplate/navbar', $data);
-			$this->load->view('Admin/master_data/data_penulis');
-			$this->load->view('AdminTemplate/sidebar');
+			$this->load->view('UserTemplate/navbar', $data);
+			$this->load->view('Penulis/data/pengajuan');
+			$this->load->view('UserTemplate/sidebar');
+		} else {
+
+			$this->session->set_flashdata('login_message', '<div class="alert alert-danger text=center" role="alert">Akses ditolak, silahkan login kembali</div>');
+			$this->session->unset_userdata('email');
+			redirect('PenulisLogin');
+		}
+	}
+	public function data_staff()
+	{
+		$user = $this->pm->get_user_data($this->session->userdata('email'));
+
+		if ($user['role'] == 'staff') {
+			$data = [
+				'data_penulis' => 'active',
+				'title' => 'Staff-Dashboard',
+				'user' => $this->pm->get_user_data($this->session->userdata('email'))
+			];
+
+			$this->load->view('UserTemplate/navbar', $data);
+			$this->load->view('Penulis/data/pengajuan');
+			$this->load->view('UserTemplate/sidebar');
 		} else {
 
 			$this->session->set_flashdata('login_message', '<div class="alert alert-danger text=center" role="alert">Akses ditolak, silahkan login kembali</div>');
