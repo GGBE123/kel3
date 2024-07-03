@@ -3,21 +3,20 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class PenulisLogin extends CI_Controller
 {
-
     public function __construct()
     {
         parent::__construct();
-
-        if ($this -> session->userdata('email')) {
+        if ($this->session->userdata('email')) {
             redirect('Penulis');
         } else {
             $this->load->model('Penulis_model', 'pm');
         }
     }
+
     public function index()
     {
         $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email');
-        $this->form_validation->set_rules('password', 'Email', 'required');
+        $this->form_validation->set_rules('password', 'Password', 'required');
 
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('PenulisLogin/index');
@@ -29,7 +28,7 @@ class PenulisLogin extends CI_Controller
 
             if (!$user) {
                 $this->session->set_flashdata('login_message', '<div class="alert alert-danger text-center" role="alert">Email yang anda masukkan tidak ditemukan !</div>');
-                redirect('PenulisLogin');
+                redirect('Penulislogin');
             } else {
                 if (password_verify($input_password, $user['password'])) {
                     $data = [
@@ -39,10 +38,9 @@ class PenulisLogin extends CI_Controller
                     redirect('Penulis');
                 } else {
                     $this->session->set_flashdata('login_message', '<div class="alert alert-danger text-center" role="alert">Password yang anda masukkan salah !</div>');
-                    redirect('PenulisLogin');
+                    redirect('Penulislogin');
                 }
             }
         }
     }
-
 }

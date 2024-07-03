@@ -113,8 +113,8 @@
                 </div>
               </div>
             </div>
-            <a href="index.html">
-              <img class="img-fluid" src="<?= base_url('assets/') ?>img/pcrlogo.jpg" alt="Theme-Logo" />
+           <a href="#">
+              <img class="img-fluid" src="<?= base_url('assets/') ?>img/logo_pcr.png" alt="Theme-Logo" style="width: 185px;"/>
             </a>
             <a class="mobile-options waves-effect waves-light">
               <i class="ti-more"></i>

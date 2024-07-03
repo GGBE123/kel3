@@ -5,7 +5,7 @@
             <div class="pcoded-inner-navbar main-menu">
                 <div class="">
                     <div class="main-menu-header">
-                        <img class="img-80 img-radius" src="<?= base_url('assets/') ?>img/testimonial-4.jpg" alt="User-Profile-Image">
+                        <img class="img-80 img-radius" src="<?= base_url('assets/') ?>img/user.png" alt="User-Profile-Image">
                         <div class="user-details">
                             <span id="more-details"><?= $user['nama'] ?></span>
                         </div>
@@ -22,44 +22,31 @@
                         </a>
                     </li>
 
-                    <?php if ($user['role'] == 'mahasiswa') : ?>
-                        <li class="pcoded-hasmenu <?= @$pengajuan ?> ">
+                    <?php if ($user['role'] == 'Dosen' || $user['role'] == 'Mahasiswa' || $user['role'] == 'Staff') : ?>
+                        <li class="pcoded-hasmenu <?= @$pengajuan ?> <?= @$status ?>">
                             <a href="javascript:void(0)" class="waves-effect waves-dark">
                                 <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i></span>
-                                <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Master Data</span>
+                                <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Information</span>
                                 <span class="pcoded-mcaret"></span>
                             </a>
                             <ul class="pcoded-submenu">
                                 <li class="<?= @$pengajuan ?>">
                                     <a href="<?= base_url('Penulis/pengajuan') ?>" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Data Admin</span>
+                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Form Pengajuan</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                           
-                            </ul>
-                        </li>
-                    <?php endif; ?>
-                    <?php if ($user['role'] == 'dosen') : ?>
-                        <li class=" ">
-                            <a href="#" class="waves-effect waves-dark">
-                                <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i></span>
-                                <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Pengajuan</span>
-                                <span class="pcoded-mcaret"></span>
-                            </a>
-                            <ul class="pcoded-submenu">
-                                <li class="">
-                                    <a href="#" class="waves-effect waves-dark">
+                                <li class="<?= @$status ?>">
+                                    <a href="<?= base_url('Penulis/status') ?>" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Status</span>
+                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Status</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
                             </ul>
                         </li>
                     <?php endif; ?>
-                  
                 </ul>
             </div>
         </nav>

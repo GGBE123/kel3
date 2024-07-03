@@ -30,10 +30,11 @@
                                 </div>
                                 <div class="col-12">
                                     <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
-                                    <input type="email" class="form-control" name="email" id="email" placeholder="name@role.pcr.ac.id" required>
+                                    <input type="email" class="form-control" name="email" id="email" placeholder="username@role.pcr.ac.id" pattern=".+\.pcr.ac.id" title="Please provide only a Best Startup Ever corporate email address">
                                 </div>
                                 <div class="col-12">
                                     <label for="password" class="form-label">Password <span class="text-danger">*</span></label>
+                                    <?= form_error('password', '<small class="text-danger">', '</small>'); ?>
                                     <input type="password" class="form-control" name="password" id="password" value="" required>
                                 </div>
                                 <div class="col-12">
