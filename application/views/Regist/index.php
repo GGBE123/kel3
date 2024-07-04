@@ -22,20 +22,20 @@
                             <div class="row gy-3 gy-md-4 overflow-hidden">
                                 <div class="col-12">
                                     <label for="NIP" class="form-label">NIP/M <span class="text-danger">*</span></label>
-                                    <input type="number" class="form-control" name="NIP" id="NIP" placeholder="Masukkan NIP/M" required>
+                                    <input type="number" class="form-control" name="NIP" id="NIP" placeholder="NIP or NIM" required>
                                 </div>
                                 <div class="col-12">
-                                    <label for="nama" class="form-label">Nama <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="nama" id="nama" placeholder="Masukkan nama" required>
+                                    <label for="nama" class="form-label">Name<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="nama" id="nama" placeholder="Your Name" required>
                                 </div>
                                 <div class="col-12">
                                     <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
-                                    <input type="email" class="form-control" name="email" id="email" placeholder="username@role.pcr.ac.id" pattern=".+\.pcr.ac.id" title="Please provide only a Best Startup Ever corporate email address">
+                                    <input type="email" class="form-control" name="email" id="email" placeholder="Enter Email" pattern=".+\.pcr.ac.id" title="Please provide only a Best Startup Ever corporate email address">
                                 </div>
                                 <div class="col-12">
                                     <label for="password" class="form-label">Password <span class="text-danger">*</span></label>
                                     <?= form_error('password', '<small class="text-danger">', '</small>'); ?>
-                                    <input type="password" class="form-control" name="password" id="password" value="" required>
+                                    <input type="password" class="form-control" name="password" id="password" placeholder="Enter Password" required>
                                 </div>
                                 <div class="col-12">
                                     <label for="role" class="form-label">Role <span class="text-danger">*</span></label>

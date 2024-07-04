@@ -62,8 +62,8 @@
                     <a href="<?= base_url('home'); ?>">Back</a>
                   </div>
                   <div class="form-group nm_lk" >
-                    <p>Dont,have an account?</p>
-                    <a href="<?= base_url('Regist');?>" class="link-primary text-decoration-none">Register</a>
+                    <p>Don't have an account?</p>
+                    <a href="<?= base_url('Regist');?>" class="link-primary text-decoration-none">Register Here</a>
                   </div>
                 </div>
               </form>

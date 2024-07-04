@@ -26,7 +26,7 @@
         <h1>SEARCH BOOKS</h1>
     </div>
     <div class="search-container">
-        <input type="text" class="search-input" placeholder="Search Books...">
+        <input type="text" name="keyword" class="search-input" placeholder="search book...">
         <button type="button" class="search-button btn btn-primary">Search</button>
     </div>
 

@@ -9,7 +9,7 @@ class Pengajuan extends CI_Controller {
     }
 
     public function index() {
-        $this->load->view('formISBN/index');
+        $this->load->view('penulis/Information/pengajuan');
     }
 
     public function submit() {
@@ -28,10 +28,46 @@ class Pengajuan extends CI_Controller {
 
         if ($inserted) {
             // Redirect to a success page
-            $this->load->view('formISBN/success');
+            $this->load->view('UserTemplate/navbar');
+            $this->load->view('penulis/Information/pengajuan');
+            $this->load->view('UserTemplate/sidebar');
         } else {
             // Redirect to an error page
             $this->load->view('formISBN/error');
         }
+    }
+
+    public function updateSiswa($id)
+    {
+        $this->form_validation->set_rules('nis','NIS','trim');
+        $this->form_validation->set_rules('nama_siswa','Nama Siswa','required|trim');
+        $this->form_validation->set_rules('alamat','Alamat','required|trim');
+        $this->form_validation->set_rules('no_telp','No.Telpon','is_natural|trim');
+
+        if($this->form_validation->run() == FALSE){
+        
+        $data['title'] = 'Update Data Siswa';
+        // get All Data siswa by id dari modelSiswa
+        $data['siswa'] = $this->sm->getSiswaById($id);
+        $data['kelas'] = $this->sm->getAllKelas();
+        $data['spp'] = $this->sm->getAllSpp();
+     
+        $this->load->view('template/sidebar');
+        $this->load->view('template/navbar');
+        $this->load->view('siswa/siswa-update',$data);
+        $this->load->view('template/footer');
+       }else{
+
+            // update data siswa melalui model siswa
+            $this->sm->updateSiswa();
+
+            $this->session->set_flashdata(
+                'siswa_message',
+                '<div class="alert alert-success" role="alert">
+                Data Berhasil Diupdate
+                </div>'
+            );
+            redirect('siswa');
+          }
     }
 }

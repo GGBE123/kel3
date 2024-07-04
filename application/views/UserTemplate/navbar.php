@@ -114,7 +114,7 @@
               </div>
             </div>
            <a href="#">
-              <img class="img-fluid" src="<?= base_url('assets/') ?>img/logo_pcr.png" alt="Theme-Logo" style="width: 185px;"/>
+              <img class="img-fluid" src="<?= base_url('assets/') ?>img/pcr_logo.png" alt="Theme-Logo" style="width: 185px;"/>
             </a>
             <a class="mobile-options waves-effect waves-light">
               <i class="ti-more"></i>
