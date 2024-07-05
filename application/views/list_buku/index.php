@@ -23,14 +23,10 @@
 
 <body>
     <div class="section-title text-center position-relative pb-3 mb-4 mx-auto">
-        <h1>SEARCH BOOKS</h1>
+        <h1 >SEARCH BOOKS</h1>
+        <input type="text" id="searchInput" class="search-input" placeholder="search book...">
     </div>
-    <div class="search-container">
-        <input type="text" name="keyword" class="search-input" placeholder="search book...">
-        <button type="button" class="search-button btn btn-primary">Search</button>
-    </div>
-
-
+   
     <div class="card-container">
         <div class="flip-card">
             <div class="flip-card-inner">
@@ -534,5 +530,27 @@
         </div>
     </div>
 </body>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const searchInput = document.getElementById('searchInput');
+        const cards = document.querySelectorAll('.flip-card');
+
+        searchInput.addEventListener('keyup', function(event) {
+            const query = event.target.value.toLowerCase();
+
+            cards.forEach(card => {
+                const title = card.querySelector('.flip-card-back h4').textContent.toLowerCase();
+                const authors = card.querySelector('.flip-card-back p').textContent.toLowerCase();
+
+                if (title.includes(query) || authors.includes(query)) {
+                    card.style.display = 'block'; // Tampilkan kartu jika sesuai dengan pencarian
+                } else {
+                    card.style.display = 'none'; // Sembunyikan kartu jika tidak sesuai
+                }
+            });
+        });
+    });
+</script>
+
 
 </html>

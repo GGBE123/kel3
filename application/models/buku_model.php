@@ -76,26 +76,6 @@ class buku_model extends CI_Model
         }
     }
 
-    public function searchBuku($keyword)
-    {
-        $query = "SELECT * FROM buku WHERE judul LIKE ? OR pengarang LIKE ?";
-        $stmt = $this->db->prepare($query);
-        $like_keyword = "%" . $keyword . "%";
-        $stmt->bind_param("ss", $like_keyword, $like_keyword);
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-        if ($result->num_rows > 0) {
-            $books = [];
-            while ($row = $result->fetch_assoc()) {
-                $books[] = $row;
-            }
-            return $books;
-        } else {
-            return [];
-        }
-    }
-
     public function updateBuku()
     {
         // inisiasi nilai yg dikirim ke dalam variabel

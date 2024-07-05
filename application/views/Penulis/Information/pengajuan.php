@@ -42,7 +42,49 @@
         animation-duration: 0.4s
     }
 
+
+    /* Styling for card */
+    .card {
+        margin-bottom: 20px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        transition: 0.3s;
+        border-radius: 5px;
+    }
+
+    .card:hover {
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    }
+
+    /* Styling for card header */
+    .card-header {
+        background-color: #06A3DA;
+        color: white;
+        padding: 10px;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+    }
+
+    /* Styling for card body */
+    .card-body {
+        padding: 15px;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .modal-content {
+            width: 90%; /* Adjust modal width for smaller screens */
+        }
+
+        .card {
+            width: 100%; /* Full width for cards on smaller screens */
+        }
+    }
+
+
     /* Add Animation */
+    
+
+
     @-webkit-keyframes animatetop {
         from {
             top: -300px;
@@ -93,136 +135,144 @@
     }
 </style>
 <!-- Page-header start -->
-<div class="page-header">
-    <div class="page-block">
-        <div class="row align-items-center mt-5">
-            <div class="col-md-8">
-                <div class="page-header-title">
-                    <p class="m-b-0">User Menu</p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <ul class="breadcrumb-title">
-                    <li class="breadcrumb-item">
-                        <a href="index.html"> <i class="fa fa-home"></i> </a>
-                    </li>
-                    <li class="breadcrumb-item"><a href="#!">Dashboard</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Page-header end -->
-<div class="card">
-    <div class="card-header">
-        <h5 class="mb-0">List Submission Book</h5>
-        <br>
-        <div id="myModal" class="modal">
-
-            <!-- Modal content -->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <span class="close">&times;</span>
-                    <h2>ISBN Number Submission Form</h2>
-                </div>
-                <form method="POST" class="w-100 rounded-1 p-4 border bg-white" action="<?= base_url('pengajuan/submit'); ?>" enctype="multipart/form-data">
-                    <label class="d-block mb-4">
-                        <span class="form-label d-block">Pengarang</span>
-                        <input required name="pengarang" type="text" class="form-control" placeholder="Name" />
-                    </label>
-
-                    <label class="d-block mb-4">
-                        <span class="form-label d-block">Judul</span>
-                        <input required name="judul" type="text" class="form-control" placeholder="Judul Buku" />
-                    </label>
-
-                    <label class="d-block mb-4">
-                        <span class="form-label d-block">Jumlah Halaman</span>
-                        <input required name="halaman" type="number" class="form-control" placeholder="Jumlah Halaman" />
-                    </label>
-
-                    <label class="d-block mb-4">
-                        <span class="form-label d-block">Media</span>
-                        <select required name="media" class="form-control">
-                            <option value="buku">Book</option>
-                            <option value="buku digital">Digital Book</option>
-                        </select>
-                    </label>
-
-                    <label class="d-block mb-4">
-                        <span class="form-label d-block">Sinopsis</span>
-                        <textarea name="sinopsis" class="form-control" rows="3" placeholder="Sinopsis Buku"></textarea>
-                    </label>
-
-                    <label class="d-block mb-4">
-                        <span class="form-label d-block">File Buku</span>
-                        <input required name="cv" type="file" class="form-control" />
-                    </label>
-
-                    <div class="mb-3">
-                        <button type="submit" class="btn btn-primary px-3 rounded-3">
-                            Kirim
-                        </button>
+<div class="pcoded-content">
+    <!-- Page-header start -->
+    <div class="page-header">
+        <div class="page-block">
+            <div class="row align-items-center mt-5">
+                <div class="col-md-8">
+                    <div class="page-header-title">
                     </div>
-                </form>
+                </div>
+                <div class="col-md-4">
+                    <ul class="breadcrumb-title">
+                        <li class="breadcrumb-item">
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
-
     </div>
-    <div class="card-block table-border-style">
-        <div class="table-responsive">
-            <button class="btn btn-sm btn-primary" id="myBtn">Create Submission</button>
-            <table class="table table-striped table-bordered">
-                <thead class="bg-dark text-white">
-                    <tr>
-                        <th>No</th>
-                        <th>Username</th>
-                        <th>NIP/NIM</th>
-                        <th>Email Address</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>
-                            <button class="btn btn-sm btn-info">Update</button>
-                            <button class="btn btn-sm btn-danger">Delete</button>
-                        </td>
-                    </tr>
-                    <!-- Trigger/Open The Modal -->
+<!-- Page-header end -->
+<class="pcoded-inner-content">
+    <!-- Main-body start -->
+    <div class="main-body">
+        <div class="page-wrapper">
+            <div class="page-body">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">List Submission Book</h5>
+                            <br>
+                            <div id="myModal" class="modal">
 
-                    <tr>
-                        <td>2</td>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                        <td>
+                                <!-- Modal content -->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <span class="close">&times;</span>
+                                        <h2>ISBN Number Submission Form</h2>
+                                    </div>
+                                    <form method="POST" class="w-100 rounded-1 p-4 border bg-white" action="<?= base_url('pengajuan/submit'); ?>" enctype="multipart/form-data">
+                                        <label class="d-block mb-4">
+                                            <span class="form-label d-block">Pengarang</span>
+                                            <input required name="pengarang" type="text" class="form-control" placeholder="Name" />
+                                        </label>
 
-                            <button class="btn btn-sm btn-info">Update</button>
-                            <button class="btn btn-sm btn-danger">Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Larry</td>
-                        <td>The Bird</td>
-                        <td>@twitter</td>
-                        <td>
+                                        <label class="d-block mb-4">
+                                            <span class="form-label d-block">Judul</span>
+                                            <input required name="judul" type="text" class="form-control" placeholder="Judul Buku" />
+                                        </label>
 
-                            <button class="btn btn-sm btn-info">Update</button>
-                            <button class="btn btn-sm btn-danger">Delete</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                                        <label class="d-block mb-4">
+                                            <span class="form-label d-block">Jumlah Halaman</span>
+                                            <input required name="halaman" type="number" class="form-control" placeholder="Jumlah Halaman" />
+                                        </label>
+
+                                        <label class="d-block mb-4">
+                                            <span class="form-label d-block">Media</span>
+                                            <select required name="media" class="form-control">
+                                                <option value="buku">Book</option>
+                                                <option value="buku digital">Digital Book</option>
+                                            </select>
+                                        </label>
+
+                                        <label class="d-block mb-4">
+                                            <span class="form-label d-block">Sinopsis</span>
+                                            <textarea name="sinopsis" class="form-control" rows="3" placeholder="Sinopsis Buku"></textarea>
+                                        </label>
+
+                                        <label class="d-block mb-4">
+                                            <span class="form-label d-block">File Buku</span>
+                                            <input required name="cv" type="file" class="form-control" />
+                                        </label>
+
+                                        <div class="mb-3">
+                                            <button type="submit" class="btn btn-primary px-3 rounded-3">
+                                                Kirim
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="card-block table-border-style">
+                            <div class="table-responsive">
+                                <button class="btn btn-sm btn-primary" id="myBtn">Create Submission</button>
+                                <table class="table table-striped table-bordered">
+                                    <thead class="bg-dark text-white">
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Username</th>
+                                            <th>NIP/NIM</th>
+                                            <th>Email Address</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>@mdo</td>
+                                            <td>
+                                                <button class="btn btn-sm btn-info">Update</button>
+                                                <button class="btn btn-sm btn-danger">Delete</button>
+                                            </td>
+                                        </tr>
+                                        <!-- Trigger/Open The Modal -->
+
+                                        <tr>
+                                            <td>2</td>
+                                            <td>Jacob</td>
+                                            <td>Thornton</td>
+                                            <td>@fat</td>
+                                            <td>
+
+                                                <button class="btn btn-sm btn-info">Update</button>
+                                                <button class="btn btn-sm btn-danger">Delete</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td>Larry</td>
+                                            <td>The Bird</td>
+                                            <td>@twitter</td>
+                                            <td>
+
+                                                <button class="btn btn-sm btn-info">Update</button>
+                                                <button class="btn btn-sm btn-danger">Delete</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
+    </class>
 
 <script>
     // Get the modal

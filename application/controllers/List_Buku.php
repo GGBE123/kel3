@@ -8,20 +8,11 @@ class List_Buku extends CI_Controller {
     }
 
     public function index() {
+        
         // Load view for search form
         $this->load->view('LayoutTemplate/navbar');
 		$this->load->view('list_buku/index');
 		$this->load->view('LayoutTemplate/footer');
     }
-
-    public function search() {
-        // Get the search keyword from the form input
-        $keyword = $this->input->post('text');
-
-        // Use the model to search for books
-        $data['books'] = $this->bm->searchBuku($keyword);
-
-        // Load the view and pass the search results
-        $this->load->view('hasil_cari', $data);
-    }
+ 
 }

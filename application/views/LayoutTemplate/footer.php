@@ -90,6 +90,7 @@
 
 <!-- JavaScript Libraries -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="<?= base_url('assets/'); ?>lib/wow/wow.min.js"></script>
 <script src="<?= base_url('assets/'); ?>lib/easing/easing.min.js"></script>
