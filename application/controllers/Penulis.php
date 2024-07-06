@@ -12,6 +12,7 @@ class Penulis extends CI_Controller
 			redirect('PenulisLogin');
 		} else {
 			$this->load->model('penulis_model', 'pm');
+			$this->load->model('buku_model', 'bm');
 		}
 	}
 
@@ -31,11 +32,12 @@ class Penulis extends CI_Controller
 	{
 		$user = $this->pm->get_user_data($this->session->userdata('email'));
 
-		if ($user['role'] == 'Dosen' || $user['role'] == 'Mahasiswa'|| $user['role'] == 'Staff') {
+		if ($user['role'] == 'Dosen' || $user['role'] == 'Mahasiswa' || $user['role'] == 'Staff') {
 
 			$data = [
 				'data_staff' => 'active',
 				'title' => 'Penulis-Dashboard',
+				'data_buku' => $this->bm->getAllBuku(),
 				'user' => $this->pm->get_user_data($this->session->userdata('email'))
 			];
 
@@ -53,7 +55,7 @@ class Penulis extends CI_Controller
 	{
 		$user = $this->pm->get_user_data($this->session->userdata('email'));
 
-		if ($user['role'] == 'Dosen' || $user['role'] == 'Mahasiswa'|| $user['role'] == 'Staff') {
+		if ($user['role'] == 'Dosen' || $user['role'] == 'Mahasiswa' || $user['role'] == 'Staff') {
 			$data = [
 				'data_penulis' => 'active',
 				'title' => 'Penulis-Dashboard',
@@ -70,5 +72,4 @@ class Penulis extends CI_Controller
 			redirect('PenulisLogin');
 		}
 	}
-	
 }
