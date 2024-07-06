@@ -36,6 +36,8 @@
   <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
   <!-- Style.css -->
   <link rel="stylesheet" type="text/css" href="<?= base_url('assets_admin/'); ?>assets/css/style.css">
+  
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
