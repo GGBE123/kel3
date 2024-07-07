@@ -48,7 +48,7 @@
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody id="bukuAju">
                                     <?php $i = 1; ?>
                                     <?php foreach ($data_buku as $row) : ?>
                                         <tr>
@@ -59,8 +59,8 @@
                                             <td><?= $row['media'] ?></td>
                                             <td><?= $row['sinopsis'] ?></td>
                                             <td>
-                                                <button class="btn btn-info" data-toggle="modal" data-target="#updateModal" data-pengarang="<?= $row['pengarang'] ?>" data-judul="<?= $row['judul']?>" data-halaman="<?= $row['halaman']?>" data-media="<?= $row['media']?>" data-sinopsis="<?= $row['sinopsis']?>" id_buku="<?= $row['id_buku'] ?>" onclick="changerModalData(this)">Update</button>
-                                                <button class="btn btn-sm btn-danger">Delete</button>
+                                                <button class="btn btn-sm btn-info" data-toggle="modal" data-target="#updateModal" data-pengarang="<?= $row['pengarang'] ?>" data-judul="<?= $row['judul'] ?>" data-halaman="<?= $row['halaman'] ?>" data-media="<?= $row['media'] ?>" data-sinopsis="<?= $row['sinopsis'] ?>" id_buku="<?= $row['id_buku'] ?>" onclick="changerModalData(this)">Update</button>
+                                                <a href="<?= base_url('Pengajuan/deleteData/') . $row["id_milik"] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</a>
                                             </td>
                                         </tr>
                                         <?php $i++ ?>
@@ -131,37 +131,37 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-                <div class="modal-body">
-                    
-                    <input type="hidden" class="form-control"  id="id_buku_update" required>
-                    <div class="form-group">
-                        <label for="pengarang_update">Nama Pengarang</label>
-                        <input type="text" class="form-control" name="pengarang_update" id="pengarang_update" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="judul_update">Judul</label>
-                        <input type="text" class="form-control" name="judul_update" id="judul_update" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="halaman_update">Jumlah halaman</label>
-                        <input type="number" class="form-control" name="halaman_update" id="halaman_update" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="media_update">Media</label>
-                        <select class="form-control" name="media" id="media" required>
-                            <option value="buku_update">Book</option>
-                            <option value="buku digital_update">Digital Book</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="sinopsis_update">Sinopsis</label>
-                        <textarea class="form-control" name="sinopsis_update" id="sinopsis_update" rows="3" required></textarea>
-                    </div>
+            <div class="modal-body">
+
+                <input type="hidden" class="form-control" id="id_buku_update" required>
+                <div class="form-group">
+                    <label for="pengarang_update">Nama Pengarang</label>
+                    <input type="text" class="form-control" name="pengarang_update" id="pengarang_update" required>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary" onclick="updateBook()">Save changes</button>
+                <div class="form-group">
+                    <label for="judul_update">Judul</label>
+                    <input type="text" class="form-control" name="judul_update" id="judul_update" required>
                 </div>
+                <div class="form-group">
+                    <label for="halaman_update">Jumlah halaman</label>
+                    <input type="number" class="form-control" name="halaman_update" id="halaman_update" required>
+                </div>
+                <div class="form-group">
+                    <label for="media_update">Media</label>
+                    <select class="form-control" name="media_update" id="media_update" required>
+                        <option value="buku">Book</option>
+                        <option value="buku digital">Digital Book</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="sinopsis_update">Sinopsis</label>
+                    <textarea class="form-control" name="sinopsis_update" id="sinopsis_update" rows="3" required></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary" onclick="updateBook()">Save changes</button>
+            </div>
         </div>
     </div>
 </div>
@@ -185,28 +185,60 @@
     }
 </script>
 <script>
-    function updateBook(){
-      $.ajax({
-                url: "<?= base_url('pengajuan/update'); ?>",
-                method: "POST",
-                data: {
-                    id_buku: $('#id_buku_update').val(),
-                    pengarang: $('#pengarang_update').val(),
-                    judul: $('#judul_update').val(),
-                    halaman: $('#halaman_update').val(),
-                    media: $('#media_update').val(),
-                    sinopsis: $('#sinopsis_update').val()
+    function updateBook() {
+        $.ajax({
+            url: "<?= base_url('pengajuan/update'); ?>",
+            method: "POST",
+            data: {
+                id_buku: $('#id_buku_update').val(),
+                pengarang: $('#pengarang_update').val(),
+                judul: $('#judul_update').val(),
+                halaman: $('#halaman_update').val(),
+                media: $('#media_update').val(),
+                sinopsis: $('#sinopsis_update').val()
 
-                },
-                dataType: "json",
-                success: function(response) {
-
-                    window.location.replace("<?= base_url('Penulis/pengajuan') ?>");
-                },
-                error: function(error) {
-                    console.error("Error fetching data: " + error);
-
+            },
+            dataType: "json",
+            success: function(data) {
+                if (data.response = 200) {
+                    $('#updateModal').modal('hide');
+                    updateTableBuku(data.dataBuku);
+                    Swal.fire({title: "Success!",text: "Data Updated!",icon: "success"});
                 }
-            });
-        }
+
+            },
+            error: function(error) {
+                console.error("Error fetching data: " + error);
+
+            }
+        });
+    }
+</script>
+<script>
+    function updateTableBuku(data) {
+        var tableBody = $("#bukuAju");
+        tableBody.empty(); // Clear existing rows
+        let i = 1;
+        $.each(data, function(index, row) {
+            var tr = $("<tr>");
+            tr.append(`<td>${i}</td>`);
+            tr.append(`<td>${row.pengarang}</td>`);
+            tr.append(`<td>${row.judul}</td>`);
+            tr.append(`<td>${row.halaman}</td>`);
+            tr.append(`<td>${row.media}</td>`);
+            tr.append(`<td>${row.sinopsis}</td>`);
+            tr.append(`<td>
+            <button class="btn btn-sm btn-info" data-toggle="modal" data-target="#updateModal" data-pengarang="${row.pengarang}" data-judul="${row.judul}" data-halaman="${row.halaman}" data-media="${row.media}" data-sinopsis="${row.sinopsis}" id_buku="${row.id_buku}" onclick="changerModalData(this)">Update</button>
+            <a href="<?= base_url('Pengajuan/deleteData/') ?>${row.id_milik}" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</a>
+            </td>`);
+
+            // Add more columns as needed
+            tableBody.append(tr);
+            i++;
+        });
+
+
+
+
+    }
 </script>
