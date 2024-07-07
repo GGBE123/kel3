@@ -55,17 +55,23 @@
                                 <span class="pcoded-mcaret"></span>
                             </a>
                             <ul class="pcoded-submenu">
-                                <li class="<?= @$data_buku ?>">
+                                <!-- <li class="<?= @$data_buku ?>">
                                     <a href="<?= base_url('admin/data_buku') ?>" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Data Admin</span>
+                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Book Submissions</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li> -->
+                                <li class="<?= @$allSubmissions ?>">
+                                    <a href="<?= base_url('admin/allSubmissions')?>" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Status Buku</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
                             </ul>
                         </li>
                     <?php endif; ?>
-                  
                 </ul>
             </div>
         </nav>

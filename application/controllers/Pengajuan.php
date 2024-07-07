@@ -5,6 +5,7 @@ class Pengajuan extends CI_Controller
 {
     private $DB_MILIK = 'milik';
     private $DB_BUKU = 'buku';
+
     public function __construct()
     {
         parent::__construct();
@@ -24,18 +25,13 @@ class Pengajuan extends CI_Controller
 
     public function submit()
     {
-        // Get form data
-
-
         // Call the model method to insert the data
         $inserted = $this->Buku_model->insertBuku();
 
         if ($inserted) {
-            // Redirect to a success page
             $this->session->set_flashdata('penulis_message', '<script>Swal.fire({title: "Success!",text: "Your data is submitted!",icon: "success"});</script>');
             redirect('Penulis/pengajuan');
         } else {
-            // Redirect to an error page
             $this->load->view('formISBN/error');
         }
     }
@@ -49,7 +45,6 @@ class Pengajuan extends CI_Controller
             'halaman' => $this->input->post('halaman', true),
             'media' => $this->input->post('media', true),
             'sinopsis' => $this->input->post('sinopsis', true)
-
         ];
 
         $this->db->where('id_buku', $data['id_buku']);
@@ -60,20 +55,21 @@ class Pengajuan extends CI_Controller
             echo json_encode(['response' => 201, 'dataBuku' => $dataBuku]);
         }
     }
+
     public function deleteData($id_milik)
     {
         $data_milik = $this->db->get_where($this->DB_MILIK, ['id_milik' => $id_milik])->row_array();
         if ($data_milik) {
             $onDeleteBuku = $this->db->where('id_buku', $data_milik['id_buku'])->delete($this->DB_BUKU);
-            if ($onDeleteBuku)
-            {
+            if ($onDeleteBuku) {
                 $onDeleteMilik = $this->db->where('id_milik', $data_milik['id_milik'])->delete($this->DB_MILIK);
-                if ($onDeleteMilik)
-                { 
+                if ($onDeleteMilik) {
                     $this->session->set_flashdata('penulis_message', '<script>Swal.fire({title: "Success!",text: "Data Deleted!",icon: "success"});</script>');
-                    redirect('Penulis/pengajuan');  
+                    redirect('Penulis/pengajuan');
                 }
             }
         }
     }
+    
 }
+?>

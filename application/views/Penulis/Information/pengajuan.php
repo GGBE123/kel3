@@ -25,7 +25,7 @@
                 <div class="page-body">
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="mb-0">List Submission Book</h5>
+                            <h5 class="mb-0">List of Books Submitted</h5>
                             <br>
                         </div>
                         <div class="card-block table-border-style">
@@ -40,12 +40,12 @@
                                 <thead class="bg-dark text-white">
                                     <tr>
                                         <th>No</th>
-                                        <th>Pengarang</th>
-                                        <th>Judul</th>
-                                        <th>Halaman</th>
+                                        <th>Writer / Writers</th>
+                                        <th>Tittle</th>
+                                        <th>Pages</th>
                                         <th>Media</th>
-                                        <th>sinopsis</th>
-                                        <th>Aksi</th>
+                                        <th>Synopsis</th>
+                                        <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody id="bukuAju">
@@ -87,15 +87,15 @@
             <form method="POST" class="w-100 rounded-1 p-4 border bg-white" action="<?= base_url('pengajuan/submit'); ?>" enctype="multipart/form-data">
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="pengarang">Nama Pengarang</label>
+                        <label for="pengarang">Writer(s)</label>
                         <input type="text" class="form-control" name="pengarang" id="pengarang" required>
                     </div>
                     <div class="form-group">
-                        <label for="judul">Judul</label>
+                        <label for="judul">Title</label>
                         <input type="text" class="form-control" name="judul" id="judul" required>
                     </div>
                     <div class="form-group">
-                        <label for="halaman">Jumlah halaman</label>
+                        <label for="halaman">Number of Pages</label>
                         <input type="text" class="form-control" name="halaman" id="halaman" required>
                     </div>
                     <div class="form-group">
@@ -106,19 +106,18 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="sinopsis">Sinopsis</label>
+                        <label for="sinopsis">Synopsis</label>
                         <textarea class="form-control" name="sinopsis" id="sinopsis" rows="3" required></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    <button type="submit" class="btn btn-primary">Submit Book</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
-
 
 <!-- START UPDATE MODAL -->
 
@@ -135,15 +134,15 @@
 
                 <input type="hidden" class="form-control" id="id_buku_update" required>
                 <div class="form-group">
-                    <label for="pengarang_update">Nama Pengarang</label>
+                    <label for="pengarang_update">Writer(s)</label>
                     <input type="text" class="form-control" name="pengarang_update" id="pengarang_update" required>
                 </div>
                 <div class="form-group">
-                    <label for="judul_update">Judul</label>
+                    <label for="judul_update">Title</label>
                     <input type="text" class="form-control" name="judul_update" id="judul_update" required>
                 </div>
                 <div class="form-group">
-                    <label for="halaman_update">Jumlah halaman</label>
+                    <label for="halaman_update">Number of Pages</label>
                     <input type="number" class="form-control" name="halaman_update" id="halaman_update" required>
                 </div>
                 <div class="form-group">
@@ -154,7 +153,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="sinopsis_update">Sinopsis</label>
+                    <label for="sinopsis_update">Synopsis</label>
                     <textarea class="form-control" name="sinopsis_update" id="sinopsis_update" rows="3" required></textarea>
                 </div>
             </div>

@@ -91,4 +91,14 @@ class Admin extends CI_Controller
 			redirect('adminLogin');
 		}
 	}
+
+	public function allSubmissions()
+	{
+		$this->load->model('Buku_model'); // Load the model
+		$data['all_submissions'] = $this->Buku_model->getAllSubmissions(); // Fetch all submissions
+		$data['user'] = $this->am->get_user_data($this->session->userdata('email')); // Tambahkan ini
+		$this->load->view('AdminTemplate/navbar', $data);
+		$this->load->view('Admin/data/all_submissions', $data);
+		$this->load->view('AdminTemplate/sidebar');
+	}
 }

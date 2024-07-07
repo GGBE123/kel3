@@ -1,7 +1,6 @@
 <?php
-class buku_model extends CI_Model
+class Buku_model extends CI_Model
 {
-
     private $BUKU_DB = 'buku';
     private $MILIK_DB = 'milik';
     private $PENULIS_DB = 'penulis';
@@ -9,12 +8,16 @@ class buku_model extends CI_Model
     public function getAllBuku()
     {
         $email_user = $this->session->userdata('email');
-        return $this->db->query("SELECT * FROM $this->MILIK_DB a, $this->PENULIS_DB b, $this->BUKU_DB c WHERE a.nip_m = b.nip_m AND a.id_buku = c.id_buku AND b.email = '$email_user' ORDER BY c.id_buku  DESC ")->result_array();
+        return $this->db->query("SELECT * FROM $this->MILIK_DB a, $this->PENULIS_DB b, $this->BUKU_DB c WHERE a.nip_m = b.nip_m AND a.id_buku = c.id_buku AND b.email = '$email_user' ORDER BY c.id_buku DESC")->result_array();
+    }
+
+    public function getAllSubmissions()
+    {
+        return $this->db->query("SELECT * FROM $this->MILIK_DB a, $this->PENULIS_DB b, $this->BUKU_DB c WHERE a.nip_m = b.nip_m AND a.id_buku = c.id_buku ORDER BY c.id_buku DESC")->result_array();
     }
 
     public function insertBuku()
     {
-
         $data_buku = [
             'pengarang' => $this->input->post('pengarang'),
             'judul' => $this->input->post('judul'),
@@ -26,13 +29,9 @@ class buku_model extends CI_Model
         $insert_buku = $this->db->insert($this->BUKU_DB, $data_buku);
 
         if ($insert_buku) {
-
             $id_buku = $this->db->query("SELECT a.id_buku FROM $this->BUKU_DB a ORDER BY a.id_buku DESC")->row_array();
-            // var_dump($id_buku['id_buku']);
-
             $user  = $this->db->get_where($this->PENULIS_DB, ['email' => $this->session->userdata('email')])->row_array();
             $nip_m = $user['nip_m'];
-
 
             $data_milik = [
                 "nip_m" => $nip_m,
@@ -50,4 +49,6 @@ class buku_model extends CI_Model
             return false;
         }
     }
+    // New method to get all submissions
 }
+?>
