@@ -5,7 +5,7 @@
             <div class="pcoded-inner-navbar main-menu">
                 <div class="">
                     <div class="main-menu-header">
-                        <img class="img-80 img-radius" src="<?= base_url('assets/') ?>img/testimonial-4.jpg" alt="User-Profile-Image">
+                        <img class="img-80 img-radius" src="<?= base_url('assets/') ?>img/user.png" alt="User-Profile-Image">
                         <div class="user-details">
                             <span id="more-details"><?= $user['nama'] ?></span>
                         </div>
@@ -48,24 +48,24 @@
                         </li>
                     <?php endif; ?>
                     <?php if ($user['role'] == 'staff') : ?>
-                        <li class="pcoded-hasmenu <?= @$data_buku ?>">
+                        <li class="pcoded-hasmenu <?= @$dataBukuIsbn ?>">
                             <a href="javascript:void(0)" class="waves-effect waves-dark">
                                 <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i></span>
                                 <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Data</span>
                                 <span class="pcoded-mcaret"></span>
                             </a>
                             <ul class="pcoded-submenu">
-                                <!-- <li class="<?= @$data_buku ?>">
-                                    <a href="<?= base_url('admin/data_buku') ?>" class="waves-effect waves-dark">
+                                 <li class="<?= @$dataBukuIsbn ?>">
+                                    <a href="<?= base_url('admin/dataBukuIsbn') ?>" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Book Submissions</span>
+                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">List Books</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
-                                </li> -->
+                                </li> 
                                 <li class="<?= @$allSubmissions ?>">
                                     <a href="<?= base_url('admin/allSubmissions')?>" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Status Buku</span>
+                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Status of List Submission</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
