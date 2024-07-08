@@ -16,7 +16,9 @@
             </div>
         </div>
     </div>
+    <!-- Page-header end -->
     <div class="pcoded-inner-content">
+        <!-- Main-body start -->
         <div class="main-body">
             <div class="page-wrapper">
                 <div class="page-body">
@@ -27,60 +29,48 @@
                         </div>
                         <div class="card-block table-border-style">
                             <div class="table-responsive">
-                                <table class="table table-striped table-bordered">
-                                    <thead class="bg-dark text-white">
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Nomor Induk</th>
-                                            <th>Writer / Writers</th>
-                                            <th>Penerbit</th>
-                                            <th>Title</th>
-                                            <th>Pages</th>
-                                            <th>Editor</th>
-                                            <th>KDT</th>
-                                            <th>Nomor ISBN</th>
-                                            <th>Tanggal Terbit</th>
-                                            <th>Email</th>
-                                            <th>Media</th>
-                                            <th>Synopsis</th>
-                                            <th>Actions</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="bukuAju">
-                                        <?php if (isset($all_submissions) && !empty($all_submissions)) : ?>
-                                            <?php $i = 1; ?>
-                                            <?php foreach ($all_submissions as $row) : ?>
-                                                <tr>
-                                                    <td><?= $i++; ?></td>
-                                                    <td><?= $row['nip_m']; ?></td>
-                                                    <td><?= $row['pengarang']; ?></td>
-                                                    <td><?= $row['penerbit']; ?></td>
-                                                    <td><?= $row['judul']; ?></td>
-                                                    <td><?= $row['halaman']; ?></td>
-                                                    <!-- Editor -->
-                                                    <td>null</td>
-                                                    <td><?= $row['kdt']; ?></td>
-                                                    <td><?= $row['no_isbn']; ?></td>
-                                                    <td><?= $row['tanggal_terbit']; ?></td>
-                                                    <td><?= $row['email']; ?></td>
-                                                    <td><?= $row['media']; ?></td>
-                                                    <td><?= $row['sinopsis']; ?></td>
-                                                    <td>
-                                                        <!-- Actions like edit/delete can go here -->
-                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                                                            Change Status
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                            <?php endforeach; ?>
-                                        <?php else : ?>
-                                            <tr>
-                                                <td colspan="7" class="text-center">No submissions found</td>
-                                            </tr>
-                                        <?php endif; ?>
-                                    </tbody>
-                                </table>
+                                <!-- Button trigger modal -->
+                               
                             </div>
+                            <table class="table table-striped table-bordered">
+                                <thead class="bg-dark text-white">
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Writer / Writers</th>
+                                        <th>Title</th>
+                                        <th>Pages</th>
+                                        <th>Media</th>
+                                        <th>Synopsis</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="bukuAju">
+                                    <?php if (isset($data_buku) && !empty($data_buku)) : ?>
+                                        <?php $i = 1; ?>
+                                        <?php foreach ($data_buku as $row) : ?>
+                                            <tr>
+                                                <td><?= $i ?></td>
+                                                <td><?= $row['pengarang'] ?></td>
+                                                <td><?= $row['judul'] ?></td>
+                                                <td><?= $row['halaman'] ?></td>
+                                                <td><?= $row['media'] ?></td>
+                                                <td><?= $row['sinopsis'] ?></td>
+                                                <td><?= $row['status'] ?></td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#updateStatusModal" data-id_buku="<?= $row['id_buku'] ?>" data-status="<?= $row['status'] ?>" onclick="setStatusModalData(this)">Change Status</button>
+                                                    <?= $this->session->flashdata('status_message'); ?>
+                                                </td>
+                                            </tr>
+                                            <?php $i++ ?>
+                                        <?php endforeach ?>
+                                    <?php else : ?>
+                                        <tr>
+                                            <td colspan="8" class="text-center">No submissions found</td>
+                                        </tr>
+                                    <?php endif ?>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -89,34 +79,93 @@
     </div>
 </div>
 
-
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- Change Status Modal -->
+<div class="modal fade" id="updateStatusModal" tabindex="-1" aria-labelledby="updateStatusModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">ISBN Number Submission Form</h5>
+                <h5 class="modal-title" id="updateStatusModalLabel">Change Book Status</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="POST" class="w-100 rounded-1 p-4 border bg-white" action="<?= base_url('pengajuan/submit'); ?>" enctype="multipart/form-data">
+            <form method="POST" class="w-100 rounded-1 p-4 border bg-white" action="<?= base_url('Admin/updateStatus'); ?>">
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="media">Status</label>
-                        <select class="form-control" name="media" id="media" required>
-                            <option value="buku">Accepted</option>
-                            <option value="buku digital">Review</option>
-                            <option value="buku digital">Denied</option>
+                        <label for="status">Status</label>
+                        <select class="form-control" name="status" id="status" required>
+                            <option value="accepted">Accepted</option>
+                            <option value="being reviewed">Review</option>
+                            <option value="denied">Denied</option>
                         </select>
                     </div>
+                    <input type="hidden" name="id_buku" id="id_buku_status">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Submit Book</button>
+                    <button type="submit" class="btn btn-primary">Change Status</button>
+                    <?= $this->session->flashdata('status_message'); ?>
                 </div>
             </form>
         </div>
     </div>
 </div>
+
+
+
+
+<script>
+    
+
+    function setStatusModalData(data) {
+        let id_buku = data.getAttribute("data-id_buku");
+        let status = data.getAttribute("data-status");
+
+        // change value
+        $('#id_buku_status').val(id_buku);
+        $('#status').val(status).change();
+    }
+
+    function updateStatus() {
+        $.ajax({
+            url: "<?= base_url('Admin/updateStatus'); ?>",
+            method: "POST",
+            data: {
+                status: $('#status').val()
+                
+            },
+            dataType: "json",
+            success: function(data) {
+                if (data.response === 200) {
+                    $('#updateModal').modal('hide');
+                    updateTableBuku(data.dataStatus);
+                    Swal.fire({
+                        title: "Success!",
+                        text: "Data Updated!",
+                        icon: "success"
+                    });
+                }
+            },
+            error: function(error) {
+                console.error("Error fetching data: " + error);
+            }
+        });
+    }
+
+    function updateTableBuku(data) {
+        var tableBody = $("#bukuAju");
+        tableBody.empty(); // Clear existing rows
+        let i = 1;
+        $.each(data, function(index, row) {
+            var tr = $("<tr>");
+            tr.append(`<td>${i}</td>`);
+            tr.append(`<td>${row.status}</td>`);
+            tr.append(`<td>
+                <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#updateStatusModal" data-id_buku="${row.id_buku}" data-status="${row.status}" onclick="setStatusModalData(this)">Change Status</button>
+            </td>`);
+
+            tableBody.append(tr);
+            i++;
+        });
+    }
+</script>

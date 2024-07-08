@@ -47,7 +47,7 @@
                             </ul>
                         </li>
                     <?php endif; ?>
-                    <?php if ($user['role'] == 'staff') : ?>
+                    <?php if ($user['role'] == 'staff perpustakaan') : ?>
                         <li class="pcoded-hasmenu <?= @$dataBukuIsbn ?>">
                             <a href="javascript:void(0)" class="waves-effect waves-dark">
                                 <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i></span>
