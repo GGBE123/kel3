@@ -18,20 +18,20 @@ class Regist extends CI_Controller {
         
         // Check if the user is already logged in
         if ($this->session->userdata('email')) {
+            // If user is already logged in, redirect to PenulisLogin controller
             redirect('PenulisLogin');
         }
     }
 
-    
-
     public function index()
     {
+        // Load the registration view
         $this->load->view('Regist/index');
     }
 
     public function register()
     {
-        // Set validation rules
+        // Set validation rules for registration form fields
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
         $this->form_validation->set_rules('password', 'Password', 'required|min_length[8]');
         $this->form_validation->set_rules('NIP', 'NIP', 'required');
@@ -39,10 +39,10 @@ class Regist extends CI_Controller {
         $this->form_validation->set_rules('role', 'Role', 'required');
         
         if ($this->form_validation->run() == FALSE) {
-            // Validation failed, load the registration view again
+            // If form validation fails, reload the registration view with validation errors
             $this->load->view('Regist/index');
         } else {
-            // Validation passed, proceed with registration
+            // If form validation succeeds, gather input data
             $data = array(
                 'email' => $this->input->post('email'),
                 'password' => $this->input->post('password'),
@@ -51,12 +51,12 @@ class Regist extends CI_Controller {
                 'role' => $this->input->post('role')
             );
             
-            // Insert the data into the database
+            // Insert user data into the database using the register_user method from Regist_model
             if ($this->rm->register_user($data)) {
-                // Registration successful, redirect to login page
+                // If registration is successful, redirect to PenulisLogin controller (login page)
                 redirect('PenulisLogin');
             } else {
-                // Registration failed, show an error message
+                // If registration fails, set flashdata error message and reload the registration view
                 $this->session->set_flashdata('error', 'Registration failed. Please try again.');
                 $this->load->view('Regist/index');
             }
