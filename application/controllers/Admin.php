@@ -3,8 +3,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 // bebasas 
 class Admin extends CI_Controller
 {
-	public function __construct()
-    {
+	public function __construct() {
         parent::__construct();
         if (!$this->session->userdata('email')) {
             $this->session->set_flashdata('login_message', '<div class="alert alert-danger text=center" role="alert">Silahkan Login Ulang</div>');
@@ -15,18 +14,22 @@ class Admin extends CI_Controller
         }
     }
 
-	public function index()
-	{
-		$data = [
-			'dashboard' => 'active',
-			'title' => 'admin-dashboard',
-			'user' => $this->am->get_user_data($this->session->userdata('email'))
-		];
+    public function index() {
+        $data = [
+            'dashboard' => 'active',
+            'title' => 'admin-dashboard',
+            'user' => $this->am->get_user_data($this->session->userdata('email')),
+            'countProses' => $this->Buku_model->countBooksByStatus('not reviewed'),
+            'countReview' => $this->Buku_model->countBooksByStatus('being reviewed'),
+            'countDiajukanIsbn' => $this->Buku_model->countBooksByStatus('Sedang diajukan ke ISBN'),
+            'countDiterima' => $this->Buku_model->countBooksByStatus('accepted'),
+            'countDitolak' => $this->Buku_model->countBooksByStatus('denied')
+        ];
 
-		$this->load->view('AdminTemplate/navbar', $data);
-		$this->load->view('Admin/index');
-		$this->load->view('AdminTemplate/sidebar');
-	}
+        $this->load->view('AdminTemplate/navbar', $data);
+        $this->load->view('Admin/index', $data);
+        $this->load->view('AdminTemplate/sidebar');
+    }
 
 	public function data_staff()
 	{

@@ -3,34 +3,35 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Penulis extends CI_Controller
 {
-    public function __construct()
-    {
+    public function __construct() {
         parent::__construct();
-        
-        // Memeriksa apakah pengguna sudah login menggunakan session 'email'
+
         if (!$this->session->userdata('email')) {
-            // Jika tidak ada session email, arahkan kembali ke halaman login dan tampilkan pesan error
             $this->session->set_flashdata('login_message', '<div class="alert alert-danger text=center" role="alert">Silahkan Login Ulang</div>');
             redirect('PenulisLogin');
         } else {
-            // Jika sudah login, load model penulis_model dan buku_model
             $this->load->model('penulis_model', 'pm');
             $this->load->model('buku_model', 'bm');
         }
     }
 
-    public function index()
-    {
-        // Menyiapkan data untuk halaman utama ('index') penulis
+    public function index() {
+        $penulis = $this->pm->get_user_data($this->session->userdata('email'));
+        $nip_m = $penulis['nip_m'];
+
         $data = [
-            'dashboard' => 'active', // Status aktif untuk menu dashboard
-            'title' => 'penulis-dashboard', // Judul halaman
-            'user' => $this->pm->get_user_data($this->session->userdata('email')) // Informasi pengguna
+            'dashboard' => 'active',
+            'title' => 'penulis-dashboard',
+            'user' => $penulis,
+            'countProses' => $this->bm->countBooksByStatusForPenulis('not reviewed', $nip_m),
+            'countReview' => $this->bm->countBooksByStatusForPenulis('being reviewed', $nip_m),
+            'countDiajukanIsbn' => $this->bm->countBooksByStatusForPenulis('Sedang diajukan ke ISBN', $nip_m),
+            'countDiterima' => $this->bm->countBooksByStatusForPenulis('accepted', $nip_m),
+            'countDitolak' => $this->bm->countBooksByStatusForPenulis('denied', $nip_m)
         ];
 
-        // Load view navbar, halaman utama penulis, dan sidebar
         $this->load->view('UserTemplate/navbar', $data);
-        $this->load->view('Penulis/index');
+        $this->load->view('Penulis/index', $data);
         $this->load->view('UserTemplate/sidebar');
     }
 

@@ -1,6 +1,30 @@
 <?php
 class Buku_model extends CI_Model
 {
+    public function __construct() {
+        parent::__construct();
+    }
+
+    // Count books by status
+    public function countBooksByStatus($status) {
+        $this->db->select('COUNT(*) as count');
+        $this->db->from('milik');
+        $this->db->join('buku', 'milik.id_buku = buku.id_buku');
+        $this->db->where('milik.status', $status);
+        $query = $this->db->get();
+        return $query->row()->count;
+    }
+
+    public function countBooksByStatusForPenulis($status, $nip_m) {
+        $this->db->select('COUNT(*) as count');
+        $this->db->from('milik');
+        $this->db->join('buku', 'milik.id_buku = buku.id_buku');
+        $this->db->where('milik.status', $status);
+        $this->db->where('milik.nip_m', $nip_m);
+        $query = $this->db->get();
+        return $query->row()->count;
+    }
+
     private $BUKU_DB = 'buku';
     private $MILIK_DB = 'milik';
     private $PENULIS_DB = 'penulis';
