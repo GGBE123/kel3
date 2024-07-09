@@ -16,6 +16,11 @@ class Buku_model extends CI_Model
         return $this->db->query("SELECT * FROM $this->MILIK_DB a, $this->PENULIS_DB b, $this->BUKU_DB c WHERE a.nip_m = b.nip_m AND a.id_buku = c.id_buku ORDER BY c.id_buku DESC")->result_array();
     }
 
+    public function getAllBukuIsbn()
+    {
+        return $this->db->query("SELECT * FROM $this->MILIK_DB a, $this->PENULIS_DB b, $this->BUKU_DB c WHERE a.nip_m = b.nip_m AND a.id_buku = c.id_buku ORDER BY c.id_buku DESC")->result_array();
+    }
+
     public function insertBuku()
     {
         $data_buku = [

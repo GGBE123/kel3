@@ -140,4 +140,13 @@ class Admin extends CI_Controller
 			redirect('Admin/allSubmissions');
 		}
 	}
+	public function dataBukuIsbn()
+    {
+        $this->load->model('Buku_model');
+        $data['dataIsbn'] = $this->Buku_model->getAllBukuIsbn();
+        $data['user'] = $this->am->get_user_data($this->session->userdata('email')); // Buat Session
+        $this->load->view('AdminTemplate/navbar', $data);
+        $this->load->view('Admin/data/dataBukuIsbn');
+        $this->load->view('AdminTemplate/sidebar', );
+    }
 }

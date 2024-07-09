@@ -39,30 +39,30 @@
                 <div class="testimonial-item bg-light my-4">
                     <div class="d-flex align-items-center border-bottom pt-5 pb-4 px-5">
                         <div class="ps-4">
-                            <h4 class="text-primary mb-1">Workshop Basis Data Lanjut : Teori Dan Praktik Basis Data Dengan Oracle</h4>
-                            <small class="text-uppercase">Muhammad Ihsan Zul, Khairul Umam Syaliman</small>
+                            <h4 class="text-primary mb-1">Rajut gagasan : dari gagasan menjadi rancangan</h4>
+                            <small class="text-uppercase">Syaifuddin Abdullah</small>
                         </div>
                     </div>
                     <div class="pt-4 pb-5 px-5">
-                    <img src="https://isbn.lib.pcr.ac.id/storage/lCj3pS6BQbbjlMxFusLFIkzTYe9pPJ-metaQ292ZXIgTUlaIEJETC5qcGc=-.jpg" alt="Book 1" class="book-image">
+                    <img src="https://isbn.lib.pcr.ac.id/storage/p7cDmfHnVDNihOPACDF7JuR68wXdu9-metaQ292ZXIgU0EgUmFqdXQuanBn-.jpg"alt="Book 1" class="book-image">
                     
                     </div>
-                    <a class="btn btn-success" href="https://isbn.lib.pcr.ac.id/detail/34">
+                    <a class="btn btn-success" href="https://isbn.lib.pcr.ac.id/detail/26">
                                         Detail
                     </a>
                 </div>
                 <div class="testimonial-item bg-light my-4">
                     <div class="d-flex align-items-center border-bottom pt-5 pb-4 px-5">
                         <div class="ps-4">
-                            <h4 class="text-primary mb-1">Pengukuran Besaran Listrik</h4>
-                            <small class="text-uppercase">Putri Madona, Retno Tri Wahyuni</small>
+                            <h4 class="text-primary mb-1">Workshop Enterprise Resource Planning</h4>
+                            <small class="text-uppercase">Nina Fadilah Najwa, Istianah Muslim</small>
                         </div>
                     </div>
                     <div class="pt-4 pb-5 px-5">
-                    <img src="https://isbn.lib.pcr.ac.id/storage/VFdrhLDRAPfL99N1fi517YO2aM3iS6-metaQ292ZXIgTUROIFBCTC5qcGc=-.jpg" alt="Book 1" class="book-image">
+                    <img src="https://isbn.lib.pcr.ac.id/storage/fR0zOuwJncNfmONEv0elSop8ECpDEi-metaQ292ZXIgTklOQSBFbnRlcnByaXNlLmpwZw==-.jpg"alt="Book 1" class="book-image">
                     
                     </div>
-                    <a class="btn btn-success" href="https://isbn.lib.pcr.ac.id/detail/13">
+                    <a class="btn btn-success" href="https://isbn.lib.pcr.ac.id/detail/37">
                                         Detail
                     </a>
                 </div>
