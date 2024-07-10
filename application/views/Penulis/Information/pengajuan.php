@@ -99,6 +99,11 @@
                         <input type="text" class="form-control" name="halaman" id="halaman" required>
                     </div>
                     <div class="form-group">
+                        <label for="file">isi buku</label>
+                        <input type="file" name="isi_buku" id="isi_buku">
+                        <input type="file" name="cover_buku" id="cover_buku">
+                    </div>
+                    <div class="form-group">
                         <label for="media">Media</label>
                         <select class="form-control" name="media" id="media" required>
                             <option value="buku">Book</option>
@@ -202,7 +207,11 @@
                 if (data.response = 200) {
                     $('#updateModal').modal('hide');
                     updateTableBuku(data.dataBuku);
-                    Swal.fire({title: "Success!",text: "Data Updated!",icon: "success"});
+                    Swal.fire({
+                        title: "Success!",
+                        text: "Data Updated!",
+                        icon: "success"
+                    });
                 }
 
             },

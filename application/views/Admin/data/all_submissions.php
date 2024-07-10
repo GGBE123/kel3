@@ -30,7 +30,7 @@
                         <div class="card-block table-border-style">
                             <div class="table-responsive">
                                 <!-- Button trigger modal -->
-                               
+                                <?= $this->session->flashdata('penulis_message'); ?>
                             </div>
                             <table class="table table-striped table-bordered">
                                 <thead class="bg-dark text-white">
@@ -59,7 +59,7 @@
                                                 <td><?= $row['status'] ?></td>
                                                 <td>
                                                     <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#updateStatusModal" data-id_buku="<?= $row['id_buku'] ?>" data-status="<?= $row['status'] ?>" onclick="setStatusModalData(this)">Change Status</button>
-                                                    <?= $this->session->flashdata('status_message'); ?>
+                                                    
                                                 </td>
                                             </tr>
                                             <?php $i++ ?>
@@ -111,12 +111,7 @@
     </div>
 </div>
 
-
-
-
 <script>
-    
-
     function setStatusModalData(data) {
         let id_buku = data.getAttribute("data-id_buku");
         let status = data.getAttribute("data-status");
@@ -131,18 +126,31 @@
             url: "<?= base_url('Admin/updateStatus'); ?>",
             method: "POST",
             data: {
-                status: $('#status').val()
-                
+                status: $('#status').val(),
+                id_buku: $('#id_buku_status').val()
             },
             dataType: "json",
             success: function(data) {
-                if (data.response === 200) {
-                    $('#updateModal').modal('hide');
+                if (data.response === 201) {
                     updateTableBuku(data.dataStatus);
+                    $('#updateModal').modal('hide');
+                    // Display the status message
                     Swal.fire({
                         title: "Success!",
-                        text: "Data Updated!",
+                        text: "Your data has been changed!",
                         icon: "success"
+                    });
+                } else if (data.response === 400) {
+                    Swal.fire({
+                        title: "Error!",
+                        text: data.message,
+                        icon: "error"
+                    });
+                } else {
+                    Swal.fire({
+                        title: "Error!",
+                        text: "Update status buku gagal",
+                        icon: "error"
                     });
                 }
             },

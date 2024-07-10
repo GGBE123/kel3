@@ -1,12 +1,14 @@
 <?php
 class Buku_model extends CI_Model
 {
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
     }
 
     // Count books by status
-    public function countBooksByStatus($status) {
+    public function countBooksByStatus($status)
+    {
         $this->db->select('COUNT(*) as count');
         $this->db->from('milik');
         $this->db->join('buku', 'milik.id_buku = buku.id_buku');
@@ -15,7 +17,8 @@ class Buku_model extends CI_Model
         return $query->row()->count;
     }
 
-    public function countBooksByStatusForPenulis($status, $nip_m) {
+    public function countBooksByStatusForPenulis($status, $nip_m)
+    {
         $this->db->select('COUNT(*) as count');
         $this->db->from('milik');
         $this->db->join('buku', 'milik.id_buku = buku.id_buku');
@@ -28,6 +31,12 @@ class Buku_model extends CI_Model
     private $BUKU_DB = 'buku';
     private $MILIK_DB = 'milik';
     private $PENULIS_DB = 'penulis';
+
+    public function update_book_status($id_buku, $data)
+    {
+        $this->db->where('id_buku', $id_buku);
+        return $this->db->update('milik', $data); // Assuming your table name is 'books'
+    }
 
     public function getAllBuku()
     {
@@ -55,6 +64,26 @@ class Buku_model extends CI_Model
             'sinopsis' => $this->input->post('sinopsis')
         ];
 
+        // Menangani unggahan file untuk isi_buku dan cover_buku
+        $isi_buku_file = $_FILES['isi_buku'];
+        $cover_buku_file = $_FILES['cover_buku'];
+
+        if ($isi_buku_file['size'] > 0) {
+            $isi_buku_upload_path = './uploads/isi_buku/';
+            $isi_buku_file_name = $isi_buku_file['name'];
+            $isi_buku_file_tmp = $isi_buku_file['tmp_name'];
+            move_uploaded_file($isi_buku_file_tmp, $isi_buku_upload_path . $isi_buku_file_name);
+            $data_buku['isi_buku'] = $isi_buku_file_name;
+        }
+
+        if ($cover_buku_file['size'] > 0) {
+            $cover_buku_upload_path = './uploads/cover_buku/';
+            $cover_buku_file_name = $cover_buku_file['name'];
+            $cover_buku_file_tmp = $cover_buku_file['tmp_name'];
+            move_uploaded_file($cover_buku_file_tmp, $cover_buku_upload_path . $cover_buku_file_name);
+            $data_buku['cover_buku'] = $cover_buku_file_name;
+        }
+
         $insert_buku = $this->db->insert($this->BUKU_DB, $data_buku);
 
         if ($insert_buku) {
@@ -78,6 +107,4 @@ class Buku_model extends CI_Model
             return false;
         }
     }
-    // New method to get all submissions
 }
-?>
