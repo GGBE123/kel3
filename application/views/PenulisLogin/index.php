@@ -35,10 +35,6 @@
                   <?= form_error('password', '<small class="text-danger">', '</small>'); ?>
                 </div>
 
-                <div class="forget_password_wrapper">
-                  <a href="a" style="float : right;">Forgot Password</a>
-                </div>
-
                 <div class="form-group">
                   <button type="submit" class="_btn_04">Login</button>
                 </div>
