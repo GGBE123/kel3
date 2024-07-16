@@ -20,12 +20,12 @@ class Pengajuan extends CI_Controller
 
     public function index()
     {
-        $this->load->view('penulis/Information/pengajuan');
+        $data['data_buku'] = $this->Buku_model->getAllBuku(); // Fetch all books for the user
+        $this->load->view('penulis/Information/pengajuan', $data);
     }
 
     public function submit()
     {
-        // Call the model method to insert the data
         $inserted = $this->Buku_model->insertBuku();
 
         if ($inserted) {
@@ -70,6 +70,5 @@ class Pengajuan extends CI_Controller
             }
         }
     }
-    
 }
 ?>

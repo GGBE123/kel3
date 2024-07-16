@@ -106,46 +106,60 @@ class Admin extends CI_Controller
 	}
 
 	public function updateStatus()
-{
-    // Load model Buku_model
-    $this->load->model('Buku_model');
+	{
+		// Load model Buku_model
+		$this->load->model('Buku_model');
 
-    // Ambil data dari input
-    $id_buku = $this->input->post('id_buku', true);
-    $status = $this->input->post('status', true);
+		// Ambil data dari input
+		$id_buku = $this->input->post('id_buku', true);
+		$status = $this->input->post('status', true);
 
-    // Periksa apakah id_buku dan status tidak kosong
-    if (empty($id_buku) || empty($status)) {
-        echo json_encode(['response' => 400, 'message' => 'ID Buku dan Status harus diisi']);
-        return;
-    }
+		// Periksa apakah id_buku dan status tidak kosong
+		if (empty($id_buku) || empty($status)) {
+			echo json_encode(['response' => 400, 'message' => 'ID Buku dan Status harus diisi']);
+			return;
+		}
 
-    // Data untuk diupdate
-    $data = [
-        'status' => $status
-    ];
+		// Data untuk diupdate
+		$data = [
+			'status' => $status
+		];
 
-    // Update status buku berdasarkan id_buku
-    $this->db->where('id_buku', $id_buku);
-    $update = $this->db->update('milik', $data);
+		// Update status buku berdasarkan id_buku
+		$this->db->where('id_buku', $id_buku);
+		$update = $this->db->update('milik', $data);
 
-    if ($update) {
-        $dataStatus = $this->Buku_model->getAllBuku();
-        echo json_encode(['response' => 201, 'dataStatus' => $dataStatus]);
-		$this->session->set_flashdata('penulis_message', '<script>Swal.fire({title: "Success!",text: "Your data is submitted!",icon: "success"});</script>');
-            redirect('Admin/allSubmissions');
-    } else {
-        echo json_encode(['response' => 500, 'message' => 'Update status buku gagal']);
-    }
-}
+		if ($update) {
+			$dataStatus = $this->Buku_model->getAllBuku();
+			echo json_encode(['response' => 201, 'dataStatus' => $dataStatus]);
+			$this->session->set_flashdata('penulis_message', '<script>Swal.fire({title: "Success!",text: "Your data is submitted!",icon: "success"});</script>');
+			redirect('Admin/allSubmissions');
+		} else {
+			echo json_encode(['response' => 500, 'message' => 'Update status buku gagal']);
+		}
+	}
 
 	public function dataBukuIsbn()
 	{
 		$this->load->model('Buku_model');
-		$data['dataIsbn'] = $this->Buku_model->getAllBukuIsbn();
-		$data['user'] = $this->am->get_user_data($this->session->userdata('email')); // Buat Session
+		$allBooks = $this->Buku_model->getAllSubmissions();
+
+		$dataIsbn = [
+			'not reviewed' => [],
+			'being reviewed' => [],
+			'accepted' => [],
+			'denied' => []
+		];
+
+		foreach ($allBooks as $book) {
+			$dataIsbn[$book['status']][] = $book;
+		}
+
+		$data['dataIsbn'] = $dataIsbn;
+		$data['user'] = $this->am->get_user_data($this->session->userdata('email'));
+
 		$this->load->view('AdminTemplate/navbar', $data);
-		$this->load->view('Admin/data/dataBukuIsbn');
-		$this->load->view('AdminTemplate/sidebar',);
+		$this->load->view('Admin/data/dataBukuIsbn', $data);
+		$this->load->view('AdminTemplate/sidebar');
 	}
 }
