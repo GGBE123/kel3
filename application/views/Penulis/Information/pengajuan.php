@@ -1,25 +1,19 @@
-<!-- Page-header start -->
 <div class="pcoded-content">
-    <!-- Page-header start -->
     <div class="page-header">
         <div class="page-block">
             <div class="row align-items-center mt-5">
                 <div class="col-md-8">
-                    <div class="page-header-title">
-                    </div>
+                    <div class="page-header-title"></div>
                 </div>
                 <div class="col-md-4">
                     <ul class="breadcrumb-title">
-                        <li class="breadcrumb-item">
-                        </li>
+                        <li class="breadcrumb-item"></li>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Page-header end -->
     <div class="pcoded-inner-content">
-        <!-- Main-body start -->
         <div class="main-body">
             <div class="page-wrapper">
                 <div class="page-body">
@@ -30,7 +24,6 @@
                         </div>
                         <div class="card-block table-border-style">
                             <div class="table-responsive">
-                                <!-- Button trigger modal -->
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                                     Create Submission
                                 </button>
@@ -41,7 +34,7 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Writer / Writers</th>
-                                        <th>Tittle</th>
+                                        <th>Title</th>
                                         <th>Pages</th>
                                         <th>Media</th>
                                         <th>Synopsis</th>
@@ -49,22 +42,28 @@
                                     </tr>
                                 </thead>
                                 <tbody id="bukuAju">
-                                    <?php $i = 1; ?>
-                                    <?php foreach ($data_buku as $row) : ?>
+                                    <?php if (isset($data_buku) && !empty($data_buku)) : ?>
+                                        <?php $i = 1; ?>
+                                        <?php foreach ($data_buku as $row) : ?>
+                                            <tr>
+                                                <td><?= $i ?></td>
+                                                <td><?= $row['pengarang'] ?></td>
+                                                <td><?= $row['judul'] ?></td>
+                                                <td><?= $row['halaman'] ?></td>
+                                                <td><?= $row['media'] ?></td>
+                                                <td><?= $row['sinopsis'] ?></td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-info" data-toggle="modal" data-target="#updateModal" data-pengarang="<?= $row['pengarang'] ?>" data-judul="<?= $row['judul'] ?>" data-halaman="<?= $row['halaman'] ?>" data-media="<?= $row['media'] ?>" data-sinopsis="<?= $row['sinopsis'] ?>" data-id_buku="<?= $row['id_buku'] ?>" onclick="changerModalData(this)">Update</button>
+                                                    <a href="<?= base_url('Pengajuan/deleteData/') . $row['id_milik'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</a>
+                                                </td>
+                                            </tr>
+                                            <?php $i++ ?>
+                                        <?php endforeach ?>
+                                    <?php else : ?>
                                         <tr>
-                                            <td><?= $i ?></td>
-                                            <td><?= $row['pengarang'] ?></td>
-                                            <td><?= $row['judul'] ?></td>
-                                            <td><?= $row['halaman'] ?></td>
-                                            <td><?= $row['media'] ?></td>
-                                            <td><?= $row['sinopsis'] ?></td>
-                                            <td>
-                                                <button class="btn btn-sm btn-info" data-toggle="modal" data-target="#updateModal" data-pengarang="<?= $row['pengarang'] ?>" data-judul="<?= $row['judul'] ?>" data-halaman="<?= $row['halaman'] ?>" data-media="<?= $row['media'] ?>" data-sinopsis="<?= $row['sinopsis'] ?>" id_buku="<?= $row['id_buku'] ?>" onclick="changerModalData(this)">Update</button>
-                                                <a href="<?= base_url('Pengajuan/deleteData/') . $row["id_milik"] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</a>
-                                            </td>
+                                            <td colspan="8" class="text-center">No submissions found</td>
                                         </tr>
-                                        <?php $i++ ?>
-                                    <?php endforeach ?>
+                                    <?php endif ?>
                                 </tbody>
                             </table>
                         </div>
@@ -74,6 +73,7 @@
         </div>
     </div>
 </div>
+
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -87,8 +87,11 @@
             <form method="POST" class="w-100 rounded-1 p-4 border bg-white" action="<?= base_url('pengajuan/submit'); ?>" enctype="multipart/form-data">
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="pengarang">Writer(s)</label>
-                        <input type="text" class="form-control" name="pengarang" id="pengarang" required>
+                        <label for="additional_authors">Additional Writer(s)</label>
+                        <div id="authors">
+                            <input type="text" class="form-control" name="additional_authors[]" placeholder="Writer's Name">
+                        </div>
+                        <button type="button" class="btn btn-secondary mt-2" onclick="addAuthorField()">Add Another Writer</button>
                     </div>
                     <div class="form-group">
                         <label for="judul">Title</label>
@@ -99,7 +102,7 @@
                         <input type="text" class="form-control" name="halaman" id="halaman" required>
                     </div>
                     <div class="form-group">
-                        <label for="file">isi buku</label>
+                        <label for="file">Book File</label>
                         <input type="file" name="isi_buku" id="isi_buku">
                         <input type="file" name="cover_buku" id="cover_buku">
                     </div>
@@ -170,25 +173,35 @@
     </div>
 </div>
 <!-- END UPDATE MODAL -->
+
 <script>
+    function addAuthorField() {
+        var authorDiv = document.getElementById('authors');
+        var input = document.createElement('input');
+        input.type = 'text';
+        input.name = 'additional_authors[]';
+        input.className = 'form-control mt-2';
+        input.placeholder = "Writer's Name";
+        authorDiv.appendChild(input);
+    }
+
     function changerModalData(data) {
         let pengarang = data.getAttribute("data-pengarang");
         let judul = data.getAttribute("data-judul");
         let halaman = data.getAttribute("data-halaman");
         let media = data.getAttribute("data-media");
         let sinopsis = data.getAttribute("data-sinopsis");
-        let id_buku = data.getAttribute("id_buku");
+        let id_buku = data.getAttribute("data-id_buku");
 
         // change value
         $('#pengarang_update').val(pengarang);
         $('#judul_update').val(judul);
         $('#halaman_update').val(parseInt(halaman));
-        $('#media_update').val(media).change()
+        $('#media_update').val(media).change();
         $('#sinopsis_update').val(sinopsis);
         $('#id_buku_update').val(id_buku);
     }
-</script>
-<script>
+
     function updateBook() {
         $.ajax({
             url: "<?= base_url('pengajuan/update'); ?>",
@@ -200,11 +213,10 @@
                 halaman: $('#halaman_update').val(),
                 media: $('#media_update').val(),
                 sinopsis: $('#sinopsis_update').val()
-
             },
             dataType: "json",
             success: function(data) {
-                if (data.response = 200) {
+                if (data.response == 201) {
                     $('#updateModal').modal('hide');
                     updateTableBuku(data.dataBuku);
                     Swal.fire({
@@ -213,16 +225,13 @@
                         icon: "success"
                     });
                 }
-
             },
             error: function(error) {
                 console.error("Error fetching data: " + error);
-
             }
         });
     }
-</script>
-<script>
+
     function updateTableBuku(data) {
         var tableBody = $("#bukuAju");
         tableBody.empty(); // Clear existing rows
@@ -236,17 +245,12 @@
             tr.append(`<td>${row.media}</td>`);
             tr.append(`<td>${row.sinopsis}</td>`);
             tr.append(`<td>
-            <button class="btn btn-sm btn-info" data-toggle="modal" data-target="#updateModal" data-pengarang="${row.pengarang}" data-judul="${row.judul}" data-halaman="${row.halaman}" data-media="${row.media}" data-sinopsis="${row.sinopsis}" id_buku="${row.id_buku}" onclick="changerModalData(this)">Update</button>
-            <a href="<?= base_url('Pengajuan/deleteData/') ?>${row.id_milik}" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</a>
+                <button class="btn btn-sm btn-info" data-toggle="modal" data-target="#updateModal" data-pengarang="${row.pengarang}" data-judul="${row.judul}" data-halaman="${row.halaman}" data-media="${row.media}" data-sinopsis="${row.sinopsis}" data-id_buku="${row.id_buku}" onclick="changerModalData(this)">Update</button>
+                <a href="<?= base_url('Pengajuan/deleteData/') ?>${row.id_milik}" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</a>
             </td>`);
-
-            // Add more columns as needed
             tableBody.append(tr);
             i++;
         });
-
-
-
-
     }
 </script>
+
