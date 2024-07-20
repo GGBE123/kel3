@@ -41,11 +41,12 @@ class Admin extends CI_Controller
 			$data = [
 				'data_staff' => 'active',
 				'title' => 'Staff-Dashboard',
-				'user' => $this->am->get_user_data($this->session->userdata('email'))
+				'user' => $this->am->get_user_data($this->session->userdata('email')),
+				'staff' => $this->am->get_staff() // Add this line to fetch and pass staff data
 			];
 
 			$this->load->view('AdminTemplate/navbar', $data);
-			$this->load->view('Admin/master_data/data_staff');
+			$this->load->view('Admin/master_data/data_staff', $data);
 			$this->load->view('AdminTemplate/sidebar');
 		} else {
 			$this->session->set_flashdata('login_message', '<div class="alert alert-danger text=center" role="alert">Akses ditolak, silahkan login kembali</div>');
@@ -53,20 +54,24 @@ class Admin extends CI_Controller
 			redirect('adminLogin');
 		}
 	}
+
 
 	public function data_penulis()
 	{
 		$user = $this->am->get_user_data($this->session->userdata('email'));
 
 		if ($user['role'] == 'admin') {
+			$this->load->model('Penulis_model'); // Load the Penulis model
+
 			$data = [
 				'data_penulis' => 'active',
 				'title' => 'Penulis-Dashboard',
-				'user' => $this->am->get_user_data($this->session->userdata('email'))
+				'user' => $this->am->get_user_data($this->session->userdata('email')),
+				'penulis' => $this->Penulis_model->get_penulis() // Fetch and pass penulis data
 			];
 
 			$this->load->view('AdminTemplate/navbar', $data);
-			$this->load->view('Admin/master_data/data_penulis');
+			$this->load->view('Admin/master_data/data_penulis', $data);
 			$this->load->view('AdminTemplate/sidebar');
 		} else {
 			$this->session->set_flashdata('login_message', '<div class="alert alert-danger text=center" role="alert">Akses ditolak, silahkan login kembali</div>');
@@ -74,6 +79,7 @@ class Admin extends CI_Controller
 			redirect('adminLogin');
 		}
 	}
+
 
 	public function data_buku()
 	{
@@ -161,5 +167,47 @@ class Admin extends CI_Controller
 		$this->load->view('AdminTemplate/navbar', $data);
 		$this->load->view('Admin/data/dataBukuIsbn', $data);
 		$this->load->view('AdminTemplate/sidebar');
+	}
+
+	public function staff_menu()
+	{
+		$user = $this->am->get_user_data($this->session->userdata('email'));
+		$staff = $this->am->get_staff();
+
+		$data = [
+			'title' => 'Daftar Staff',
+			'staff_menu' => 'active',
+			'user' => $user,
+			'staff' => $staff
+		];
+
+		$this->load->view('AdminTemplate/navbar', $data);
+		$this->load->view('Admin/master_data/data_staff', $data);
+		$this->load->view('AdminTemplate/sidebar', $data);
+	}
+
+
+
+	public function add_staff()
+	{
+		$data = [
+			'nama' => $this->input->post('nama'),
+			'email' => $this->input->post('email'),
+			'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
+			'role' => $this->input->post('role')
+		];
+
+		$this->am->insert_staff($data);
+		$this->session->set_flashdata('staff_message', '<div class="alert alert-success" role="alert">Staff added successfully!</div>');
+		redirect('admin/staff_menu');
+	}
+
+
+
+	public function delete_staff($id)
+	{
+		$this->am->delete_staff($id);
+		$this->session->set_flashdata('staff_message', '<div class="alert alert-success" role="alert">Staff deleted successfully!</div>');
+		redirect('admin/staff_menu');
 	}
 }
