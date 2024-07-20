@@ -5,7 +5,7 @@
             <div class="row align-items-center mt-5">
                 <div class="col-md-8">
                     <div class="page-header-title">
-                        <p class="m-b-0">Penulis Menu</p>
+                        <p class="m-b-0">List User (writers) Account</p>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -22,7 +22,6 @@
     <!-- Page-header end -->
     <div class="card">
         <div class="card-header">
-            <h5 class="mb-0">Daftar Akun Penulis</h5>
         </div>
         <div class="card-block table-border-style">
             <div class="table-responsive">
