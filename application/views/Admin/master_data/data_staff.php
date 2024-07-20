@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Staff Menu</title>
-    <!-- Add your CSS and JS files here -->
+    <!-- Include your CSS and JS files here -->
 </head>
 <body>
     <div class="pcoded-content">
@@ -13,37 +13,42 @@
                 <div class="row align-items-center mt-5">
                     <div class="col-md-8">
                         <div class="page-header-title">
+                            <!-- Judul halaman -->
                             <p class="m-b-0">List Staff Account</p>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <ul class="breadcrumb-title">
                             <li class="breadcrumb-item">
+                                <!-- Breadcrumb untuk halaman utama -->
                                 <a href="index.html"> <i class="fa fa-home"></i> </a>
                             </li>
-                            <li class="breadcrumb-item"><a href="#!">Dashboard</a>
-                            </li>
+                            <li class="breadcrumb-item"><a href="#!">Dashboard</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
         <!-- Page-header end -->
+
         <div class="pcoded-inner-content">
             <div class="main-body">
                 <div class="page-wrapper">
                     <div class="page-body">
                         <div class="card">
                             <div class="card-header">
+                                <!-- Tombol untuk memunculkan modal tambah staff -->
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addStaffModal">
-                                   Add Staff
+                                    Add Staff
                                 </button>
                                 <br>
                             </div>
                             <div class="card-block table-border-style">
                                 <div class="table-responsive">
+                                    <!-- Menampilkan pesan sukses atau gagal dari session -->
                                     <?= $this->session->flashdata('staff_message'); ?>
                                 </div>
+                                <!-- Tabel untuk menampilkan daftar staff -->
                                 <table class="table table-striped table-bordered">
                                     <thead class="bg-dark text-white">
                                         <tr>
@@ -58,18 +63,23 @@
                                         <?php if (!empty($staff)) : ?>
                                             <?php $i = 1; ?>
                                             <?php foreach ($staff as $member) : ?>
+                                                <!-- Baris untuk setiap staff -->
                                                 <tr>
-                                                    <td><?= $i ?></td>
-                                                    <td><?= htmlspecialchars($member->nama, ENT_QUOTES, 'UTF-8') ?></td>
-                                                    <td><?= htmlspecialchars($member->email, ENT_QUOTES, 'UTF-8') ?></td>
-                                                    <td><?= htmlspecialchars($member->role, ENT_QUOTES, 'UTF-8') ?></td>
+                                                    <td><?= $i ?></td> <!-- Nomor urutan -->
+                                                    <td><?= htmlspecialchars($member->nama, ENT_QUOTES, 'UTF-8') ?></td> <!-- Nama staff -->
+                                                    <td><?= htmlspecialchars($member->email, ENT_QUOTES, 'UTF-8') ?></td> <!-- Email staff -->
+                                                    <td><?= htmlspecialchars($member->role, ENT_QUOTES, 'UTF-8') ?></td> <!-- Role staff -->
                                                     <td>
+                                                        <!-- Tombol untuk menghapus staff -->
                                                         <a href="<?= base_url('admin/delete_staff/') . $member->id_staff ?>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Hapus</a>
+                                                        <!-- Tombol untuk memunculkan modal update staff -->
+                                                        <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#updateStaffModal" onclick="fillUpdateModal(this)" data-staff='<?= json_encode($member) ?>'>Edit</button>
                                                     </td>
                                                 </tr>
                                                 <?php $i++ ?>
                                             <?php endforeach ?>
                                         <?php else : ?>
+                                            <!-- Jika tidak ada staff -->
                                             <tr>
                                                 <td colspan="5" class="text-center">No staff accounts found</td>
                                             </tr>
@@ -83,7 +93,7 @@
             </div>
         </div>
 
-        <!-- Add Staff Modal -->
+        <!-- Modal tambah staff -->
         <div class="modal fade" id="addStaffModal" tabindex="-1" aria-labelledby="addStaffModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -121,7 +131,7 @@
             </div>
         </div>
 
-        <!-- Update Staff Modal -->
+        <!-- Modal update staff -->
         <div class="modal fade" id="updateStaffModal" tabindex="-1" aria-labelledby="updateStaffModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -157,11 +167,14 @@
         </div>
     </div>
 
+    <!-- Script to populate update staff modal with staff data -->
     <script>
         function fillUpdateModal(button) {
+            // Ambil data staff dari atribut data-staff pada tombol Edit
             const staff = button.getAttribute('data-staff');
             const staffData = JSON.parse(staff);
 
+            // Mengisi nilai input pada modal update staff dengan data staff yang dipilih
             document.getElementById('update_id').value = staffData.id_staff;
             document.getElementById('update_nama').value = staffData.nama;
             document.getElementById('update_email').value = staffData.email;
